@@ -16,20 +16,12 @@ fn main() {
 	.iter()
 	.cloned()
 	.collect();
-
+	// start main
 	let max: usize = 1000000;
 	let sqr: usize = (max as f64).sqrt() as usize;
 	let primes: usize = historical_data[&max];
 	let mut sieve = vec![true; max];
 	sieve[0] = false;
-	let mut digits: usize = 0;
-	{
-		let mut i = max as i64;
-		while !i == 0 {
-			digits += 1;
-			i /= 10;
-		}
-	}
 	// setup done
 	let start = Instant::now();
 	let mut i: usize = 1;
@@ -45,15 +37,15 @@ fn main() {
 	}
 	let t = Instant::now().duration_since(start);
 	// sieve done
-	let start_format = Instant::now();
 	let mut res: String = "".to_string();
 	let mut counted = 0;
+	let start_format = Instant::now();
 	for i in 0..max {
 		if sieve[i] {
-			res.push_str(&(format!("{1:0$} {2}\n", &digits, &(i + 1), "is prime")));
+			res.push_str(&(format!("{} {}\n", &(i + 1), "is prime")));
 			counted += 1;
 		} else {
-			res.push_str(&(format!("{1:0$} {2}\n", &digits, &(i + 1), "is not prime")));
+			res.push_str(&(format!("{} {}\n", &(i + 1), "is not prime")));
 		}
 	}
 	let t_format = Instant::now().duration_since(start_format);
